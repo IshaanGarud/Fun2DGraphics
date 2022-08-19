@@ -1,0 +1,39 @@
+import pygame, sys, math, random
+
+pygame.init()
+
+WIDTH, HEIGHT, FPS = 720, 800, 60
+AVG = min(WIDTH, HEIGHT)
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+screen_rect = screen.get_rect()
+clock = pygame.time.Clock()
+    
+colours = {"white": (255, 255, 255),
+           "black": (0, 0, 0),
+           "gray": (25, 25, 25),
+           "l_gray": (150, 150, 150),
+           "bg": (25, 25, 75),
+           "red": (215, 65, 90),
+           "green": (65, 215, 90),
+           "d_green": (50, 190, 100),
+           "blue": (100, 100, 255)}
+           
+points = [[WIDTH//2-150, WIDTH//2-150], [WIDTH//2+150, WIDTH//2-150]]
+           
+while True:
+    screen.fill(colours["white"])
+    
+    keys = pygame.key.get_pressed()
+    for ev in pygame.event.get():
+        if ev.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
+            pygame.quit()
+            sys.exit()
+            
+    for point in points:
+        pygame.draw.circle(screen, colours["black"], point, 10)
+        for i in range(len(points)):
+            pygame.draw.line           
+ 
+    pygame.display.update()
+    clock.tick(FPS)
+                      
