@@ -1,0 +1,63 @@
+"""
+Matrices:-
+|Xnew| = |cos(ang) -sin(ang)|   |X old|
+|    |   |                  | × |     |
+|Ynew| = |sin(ang) cos(ang) |   |Y old|
+"""
+import pygame, sys, math, random
+
+pygame.init()
+
+WIDTH, HEIGHT, FPS = 720, 800, 60
+AVG = min(WIDTH, HEIGHT)
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+screen_rect = screen.get_rect()
+clock = pygame.time.Clock()
+
+cenX, cenY = WIDTH//2, HEIGHT//2
+    
+colours = {"white": (255, 255, 255),
+           "black": (0, 0, 0),
+           "gray": (25, 25, 25),
+           "l_gray": (150, 150, 150),
+           "bg": (25, 25, 75),
+           "red": (215, 65, 90),
+           "green": (65, 215, 90),
+           "d_green": (50, 190, 100),
+           "blue": (100, 100, 255)}
+           
+# For Square
+points = [(cenX-150, cenY-150), (cenX+150, cenY-150),
+          (cenX+150, cenY+150), (cenX-150, cenY+150)]
+          
+'''# For Triangle
+points = [(cenX, cenY),
+      (cenX+150, cenY+150), (cenX-150, cenY+150)]'''          
+      
+'''# For Pentagon
+points = [(cenX, cenY),
+     (cenX+150, cenY+150), (cenX+150, cenY+300),
+     (cenX-150, cenY+300),(cenX-150, cenY+150)]'''
+             
+       
+           
+while True:
+    screen.fill(colours["white"])
+    
+    keys = pygame.key.get_pressed()
+    for ev in pygame.event.get():
+        if ev.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
+            pygame.quit()
+            sys.exit()
+            
+    for point in points:
+        pygame.draw.circle(screen, colours["black"], point, 10)
+        for i in range(len(points)-1):
+            #print(points[i], points[i+1])   
+            pygame.draw.line(screen, colours["red"], points[i], points[i+1], 5)
+            if i == len(points)-2:
+                pygame.draw.line(screen, colours["red"], points[len(points)-1], points[0], 5) #From the last point in list to first point
+ 
+    pygame.display.update()
+    clock.tick(FPS)
+                      
